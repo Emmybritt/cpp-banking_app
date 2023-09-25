@@ -61,7 +61,8 @@ Person Users::find_user(int account_number){
         const Person& foundUser = it->second;
         return foundUser;
     }else {
-        cout << "User does not exits";
+        system("clear");
+        cout << "Account Not Found" << endl;
         return Person();
     }
     

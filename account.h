@@ -27,9 +27,11 @@ class Account {
         
         // Creates User Accounts
         void open_account(std::string account_name, std::string password);
-        void deposit_money(float amount);
+        void deposit_money(float& amount, int& account_number);
         void withdraw_money(int account_number, float amount, std::string password);
         void check_account_balance(int account_number, std::string password);
+
+        /* Deposits money to an user with account number*/
         void display_account_details(int acount_number, std::string password);
 
         /* Generates Random Account Number For Users When creating account */

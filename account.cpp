@@ -19,7 +19,8 @@ Account::Account() {
        case 1:
         cout << "Get started with creating your account"<< endl;
         cout << "Enter your full name: ";
-        cin >> full_name;
+        getline(cin, full_name);
+        
         cout << "Enter a new password: ";
         cin >> password;
         cout << "Enter your age: ";
@@ -28,7 +29,6 @@ Account::Account() {
         {
             open_account(full_name, password);
         }
-        
         break;
 
         case 2:
@@ -37,6 +37,11 @@ Account::Account() {
         float amount;
         cout << "Enter amount to deposit: ";
         cin >> amount;
+        if (amount && account_number)
+        {
+            deposit_money(amount, account_number);
+        }
+        
         
         break;
 
@@ -45,8 +50,11 @@ Account::Account() {
 
         case 4:
 
-        cout << "Check your account balance here";
-        
+        cout << "Enter Your Account Number: ";
+        cin >> account_number;
+        cout << "Enter your password: ";
+        cin >> password;
+        check_account_balance(account_number, password);
         break;
        
        default:
@@ -109,9 +117,18 @@ void Account::open_account(std::string account_name, std::string password){
     
 }
 
-void Account::deposit_money(float amount){
+void Account::deposit_money(float& amount, int& account_number){
+    Person user = users.find_user(account_number);
+    if (user.account_number)
+    {
+        float user_new_act_bal = user.account_balance + amount;
+        cout << "your new account balance is: "<< user_new_act_bal << endl;
+    }else{
+        cout << "nothing"
+    }
     
     
+
 }
 
 void Account::withdraw_money(int account_number, float amount, std::string password) {
@@ -119,8 +136,15 @@ void Account::withdraw_money(int account_number, float amount, std::string passw
 }
 
 void Account::check_account_balance(int account_number, std::string password) {
+    Person user = users.find_user(account_number);
+    if (user.password == password)
+    {
+        cout << "Your account balance is: "<< user.account_balance;    
+    }else {
+        cout << "Incorrect Password or user does not exist"<< endl;
+    };
     
-}
+};
 
 void Account::display_account_details(int acount_number, std::string password) {
 
